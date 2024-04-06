@@ -32,7 +32,7 @@ This README would normally document whatever steps are necessary to get your app
 ---------------------------
 	
 ## Create Database:
-    select default project to CleanArch.Infrastructure
+    select CleanArch.Infrastructure as default project from package manager console
     add-migration v1
     update-database
 	
