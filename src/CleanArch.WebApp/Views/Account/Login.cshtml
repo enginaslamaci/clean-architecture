@@ -1,0 +1,93 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@model IEnumerable<AuthenticationScheme>
+
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>Login</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/toastr.min.css" rel="stylesheet" />
+
+    <style>
+        html, body, .container {
+            height: 100%;
+        }
+
+        .login-form {
+            width: 350px;
+            padding: 2rem 1rem 1rem;
+        }
+
+        form {
+            background-color: ghostwhite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form method="post" action="/login">
+        <div class="container">
+            <div class="wrapper d-flex align-items-center justify-content-center h-100">
+                <div class="card login-form">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Login</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="userName" name="userName" placeholder="Email" required autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required autocomplete="off">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Submit</button>
+                            <a class="btn btn-md my-2 btn-google w-100 border border-primary rounded" href="/external-login?scheme=@Model.FirstOrDefault(r=>r.Name == "Google")?.Name"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> Login With Google</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/toastr.min.js"></script>
+
+    @* toastr begin *@
+    <style>
+        .toast-top-center {
+            top: 10%;
+        }
+    </style>
+    <script>
+        toastr.options = {
+            "positionClass": "toast-top-center",
+            "timeOut": 3000,
+        }
+    </script>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            toastr.success('@TempData["SuccessMessage"]');
+        </script>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+            toastr.error('@TempData["ErrorMessage"]');
+        </script>
+    }
+    @* toastr end *@
+
+</body>
+</html>
+

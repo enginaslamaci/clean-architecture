@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "747adec5-5b57-4222-85c5-0bd7a37e5e59",
+		"name": "CleanArchitecture",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "9660917"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"user1\",\r\n    \"lastName\": \"lastName1\",\r\n    \"email\": \"user1@gmail.com\",\r\n    \"phoneNumber\": \"123123121\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7081/api/v1/account/register"
+					},
+					"response": []
+				},
+				{
+					"name": "authentication",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"basicuser@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7081/api/v1/account/authenticate"
+					},
+					"response": []
+				},
+				{
+					"name": "refresh-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"refreshToken\": \"vKJu9oi6cogA1cwD6b+qOLPEjfe5RQjZh+HCNUdlJuY=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7081/api/v1/account/refresh-token"
+					},
+					"response": []
+				},
+				{
+					"name": "sign-out",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"refreshToken\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7081/api/v1/account/sign-out"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "add-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"name1\",\r\n  \"lastName\": \"lName1\",\r\n  \"email\": \"user1@mail.com\",\r\n  \"roles\": [\r\n    \"Basic\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7081/api/v1/user"
+					},
+					"response": []
+				},
+				{
+					"name": "change-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"user1@mail.com\",\r\n  \"currentPassword\": \"123456\",\r\n  \"newPassword\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7081/api/v1/user/change-password"
+					},
+					"response": []
+				},
+				{
+					"name": "update-user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"name2\",\r\n  \"lastName\": \"lName2\",\r\n  \"email\": \"user1@mail.com\",\r\n  \"status\": 0,\r\n  \"roles\": [\r\n    \"Basic\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7081/api/v1/user"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://localhost:7081/api/v1/user/14c8a275-644c-494c-a0c3-b1af34757719"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "GetCustomers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response is ok\",function(){\r",
+									"    pm.environment.set(\"token\", pm.response.json().data.userToken);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjpbInVzZXIxQG1haWwuY29tIiwidXNlcjFAbWFpbC5jb20iXSwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI3MjEzZDczYy0yMzg5LTQ3MjYtOTMzZi1lZjEwYzNmMzNjZjYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ1c2VyMUBtYWlsLmNvbSIsInVpZCI6IjcyMTNkNzNjLTIzODktNDcyNi05MzNmLWVmMTBjM2YzM2NmNiIsImlwIjoiMTkyLjE2OC4wLjEwNiIsInRlc3QyIjoidGVzdDIiLCJyb2xlcyI6IkJhc2ljIiwiZXhwIjoxNzEwNDA1Mjk3LCJpc3MiOiJDbGVhbkFyY2giLCJhdWQiOiJDb3JlSWRlbnRpdHlVc2VyIn0.lKd6zpc2zQrUvpVXMa_Hkoxe1VcZzlT0kkElXLA3I70"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7081/api/v1/Customer?Page=1&Size=5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7081",
+							"path": [
+								"api",
+								"v1",
+								"Customer"
+							],
+							"query": [
+								{
+									"key": "Page",
+									"value": "1"
+								},
+								{
+									"key": "Size",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjpbInVzZXIxQG1haWwuY29tIiwidXNlcjFAbWFpbC5jb20iXSwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI3MjEzZDczYy0yMzg5LTQ3MjYtOTMzZi1lZjEwYzNmMzNjZjYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ1c2VyMUBtYWlsLmNvbSIsInVpZCI6IjcyMTNkNzNjLTIzODktNDcyNi05MzNmLWVmMTBjM2YzM2NmNiIsImlwIjoiMTkyLjE2OC4wLjEwNiIsInRlc3QyIjoidGVzdDIiLCJyb2xlcyI6IkJhc2ljIiwiZXhwIjoxNzEwNDExNDI3LCJpc3MiOiJDbGVhbkFyY2giLCJhdWQiOiJDb3JlSWRlbnRpdHlVc2VyIn0.NDNifB0cGt6pgtIXDxJnR7OpcvD8wZQihGEDeIiSZx4"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"FirstName\": \"customerName1\",\r\n    \"LastName\": \"customerLName1\",\r\n    \"City\": \"İstanbul\",\r\n    \"Country\": \"TR\",\r\n    \"Phone\":\"123123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:7081/api/v1/Customer"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "UploadFile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjpbImJhc2ljdXNlciIsImJhc2ljdXNlciJdLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImYxYjhlNDBiLTZlZGQtNGZhMi1iZWEzLTcyYzBlZmMyZmI5MyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImJhc2ljdXNlckBnbWFpbC5jb20iLCJ1aWQiOiJmMWI4ZTQwYi02ZWRkLTRmYTItYmVhMy03MmMwZWZjMmZiOTMiLCJpcCI6IjE3Mi4yMi4wLjEiLCJyb2xlcyI6IkJhc2ljIiwiZXhwIjoxNzEyNDI4MzQ3LCJpc3MiOiJDbGVhbkFyY2giLCJhdWQiOiJDb3JlSWRlbnRpdHlVc2VyIn0.SthBpmLeW5JvIJgGUzepZwhEvJ74fmO_aNWYfZurxgI"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"/C:/BTPRO/Archive/Btpro/Sample files/file_example_JPG_500kB.jpg",
+										"/C:/BTPRO/Archive/Btpro/Sample files/Sample_abc.jpg"
+									]
+								}
+							]
+						},
+						"url": "https://localhost:7081/api/v1/Product/upload"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

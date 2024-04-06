@@ -1,0 +1,27 @@
+version: '3.4'
+
+name: clean-architecture
+
+services:
+  cleanarch.api:
+    image: ${DOCKER_REGISTRY-}cleanarchapi
+    container_name: cleanarchapi_container
+    build:
+      context: .
+      dockerfile: CleanArch.API/Dockerfile
+
+  cleanarch.web:
+    image: ${DOCKER_REGISTRY-}cleanarchweb
+    container_name: cleanarchweb_container
+    build:
+      context: .
+      dockerfile: CleanArch.WebApp/Dockerfile
+
+  sqlserver:
+     image: mcr.microsoft.com/mssql/server:2019-latest
+     container_name: sqlserver_container
+
+
+volumes:
+  sqlserver_volume: 
+
