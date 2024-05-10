@@ -1,6 +1,10 @@
 # README #
 This README would normally document whatever steps are necessary to get your application up and running.
 
+---------------------------
+
+<img src="https://github.com/enginaslamaci/clean-architecture/blob/main/docs/clean-architecture%20template.png" width="450" height="350" />
+
 ## Technologies:
     ASP.NET Core 8
     Entity Framework Core 8
