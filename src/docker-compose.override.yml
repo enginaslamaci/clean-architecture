@@ -7,6 +7,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=80
       # - ASPNETCORE_HTTPS_PORTS=443
       - "ConnectionStrings:ConnStr=Server=sqlserver,1433; Database=CleanArchitecture; User=sa; Password=Sa123456; TrustServerCertificate=True"
+      - "RedisConnection=redis"
     ports:
       - "5000:80"
       # - "5001:443"
@@ -35,3 +36,11 @@ services:
        - "1433:1433"
     volumes:
       - sqlserver_volume:/var/opt/mssql
+
+  redis:
+    command: redis-server
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+    

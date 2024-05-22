@@ -6,6 +6,7 @@ using CleanArch.Persistence.Contexts;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using StackExchange.Redis;
 using System.Threading.RateLimiting;
 
 namespace CleanArch.API
@@ -114,6 +115,13 @@ namespace CleanArch.API
             //        .AllowAnyMethod()
             //        .AllowAnyHeader());
             //});
+
+            #endregion
+
+            #region cache
+
+            var redisConnection = ConnectionMultiplexer.Connect(configuration["RedisConnection"]);
+            services.AddSingleton<IConnectionMultiplexer>(redisConnection);
 
             #endregion
         }

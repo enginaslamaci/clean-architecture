@@ -1,10 +1,12 @@
 ﻿using CleanArch.Application.Abstractions.Infrastructure.Services;
+using CleanArch.Application.Abstractions.Infrastructure.Services.Cache.Redis;
 using CleanArch.Application.Abstractions.Infrastructure.Services.Storage;
 using CleanArch.Application.Abstractions.Infrastructure.Services.Token;
 using CleanArch.Domain.Common.Results;
 using CleanArch.Domain.Settings;
 using CleanArch.Infrastructure.Enums;
 using CleanArch.Infrastructure.Services;
+using CleanArch.Infrastructure.Services.Cache.Redis;
 using CleanArch.Infrastructure.Services.Storage.AWS;
 using CleanArch.Infrastructure.Services.Storage.Azure;
 using CleanArch.Infrastructure.Services.Storage.Local;
@@ -30,6 +32,7 @@ namespace CleanArch.Infrastructure
             services.AddScoped<IQRCodeService, QRCodeService>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<ICsvExporter, CsvExporter>();
+            services.AddScoped<IRedisService, RedisService>();
 
             #endregion
 
