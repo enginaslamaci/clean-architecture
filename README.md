@@ -14,6 +14,7 @@ This README would normally document whatever steps are necessary to get your app
     JWT
     OAuth 2.0 (Google) / OpenID
     MediatR
+	Redis
     RateLimit
     Serilog
     FluentValidation
